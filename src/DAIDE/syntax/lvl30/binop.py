@@ -28,16 +28,14 @@ class BINOP(DAIDE_OBJECT, ABC):
         rest = string[3:]
         
         arrangements = []
-        try:
-            while True:
-                rest = consume(rest, " (")
-                
-                arrangement, rest = ARRANGEMENT.parse(rest)
-                
-                rest = consume(rest, ")")
-                arrangements.append(arrangement)
-        except ConsumeError as e:
-            pass
+        while rest[:2] == " (":
+            rest = consume(rest, " (")
+            
+            arrangement, rest = ARRANGEMENT.parse(rest)
+            
+            rest = consume(rest, ")")
+            arrangements.append(arrangement)
+
 
         for subclass in BINOP.__subclasses__():
             if subclass.__name__ == OP:
