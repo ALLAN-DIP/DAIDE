@@ -59,3 +59,10 @@ class ORR(BINOP):
     @classmethod
     def parse(cls, string):
         return super().parse(string, "ORR")
+
+
+import sys
+current_module = sys.modules[__name__]
+
+x = BINOP.__subclasses__()[0]
+print(x)
