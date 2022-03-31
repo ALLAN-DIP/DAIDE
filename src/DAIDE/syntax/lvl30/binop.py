@@ -1,17 +1,17 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from abc import ABC, abstractmethod
+from abc import ABC
 
-from DAIDE.syntax.DAIDE_OBJECT import DAIDE_OBJECT
+from DAIDE.syntax.daide_object import DAIDE_OBJECT
+from DAIDE.syntax.arrangement import ARRANGEMENT
 from DAIDE.utils.exceptions import ParseError
 from DAIDE.utils.parsing import consume 
 
 class BINOP(DAIDE_OBJECT, ABC):
     """Abstract Base Class for BINOP DAIDE words like AND, ORR"""
-    def __init__(self, arrangements, OP):
+    def __init__(self, arrangements):
         self.arrangements = arrangements
-        self.OP = OP
 
     def __str__(self):
         if len(self.arrangements) == 0:
@@ -19,7 +19,7 @@ class BINOP(DAIDE_OBJECT, ABC):
         elif len(self.arrangements) == 1:
             return self.arrangements[0]
         
-        return self.OP + "".join([f" ({a})" for a in self.arrangements])
+        return self.__class__.__name__ + "".join([f" ({a})" for a in self.arrangements])
     
     @classmethod
     def parse(cls, string, OP):
@@ -38,24 +38,30 @@ class BINOP(DAIDE_OBJECT, ABC):
         except Exception as e:
             print(e)
 
-        if OP == "ORR":
-            return ORR(arrangements), rest
-        else:
-            return AND(arrangements), rest
+        for subclass in cls.__subclasses__:
+            if subclass.__name__ == OP:
+                return subclass(arrangements)
 
 
 class AND(BINOP):
     def __init__(self, arrangements):
-        super().__init__(arrangements, "AND")
+        super().__init__(arrangements)
+    
+    def __str__(self):
+        return super().__str__()
 
-    @classmethod
-    def parse(cls, string):
-        return super().parse(string, "AND")
 
 class ORR(BINOP):
     def __init__(self, arrangements):
-        super().__init__(arrangements, "ORR")
+        super().__init__(arrangements)
 
-    @classmethod
-    def parse(cls, string):
-        return super().parse(string, "ORR")
+    def __str__(self):
+        return super().__str__()
+
+if __name__ == "__main__":
+    import sys
+    current_module = sys.modules[__name__]
+
+    x = BINOP.__subclasses__()[0]
+    print("-")
+    print()

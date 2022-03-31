@@ -1,8 +1,9 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.syntax.DAIDE_OBJECT import DAIDE_OBJECT
-from DAIDE.utils.parsing import consume 
+from DAIDE.syntax.daide_object import DAIDE_OBJECT
+from DAIDE.utils.parsing import consume
+from DAIDE.syntax.lvl0.order import ORDER 
 
 class ARRANGEMENT(DAIDE_OBJECT):
     """an ARRANGEMENT object"""
@@ -15,14 +16,12 @@ class ARRANGEMENT(DAIDE_OBJECT):
 
     @classmethod
     def parse(cls, string):
-        print(string)
-        if consume(string, "AND", False) != False:
-            arrangement, rest = AND.parse(string)
-        elif consume(string, "ORR", False) != False:
-            arrangement, rest = ORR.parse(string)
-        elif consume(string, "XDO", False) != False:
-            arrangement, rest = XDO.parse(string)
-        elif consume(string, "(", False) != False:
+        no_sub_parse = ["ARRANGEMENT", "ORDER"]
+        for subclass in DAIDE_OBJECT.__subclasses__():
+            if subclass.__name__ not in no_sub_parse:
+                if consume(string, subclass.__name__, False) != False:
+                    arrangement, rest = subclass.parse(string)
+        else:
             arrangement, rest = ORDER.parse(string)
 
         return ARRANGEMENT(arrangement), rest
