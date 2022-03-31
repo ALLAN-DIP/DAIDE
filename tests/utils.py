@@ -12,4 +12,6 @@ def str_parse_str_test(arrangement, error_msg):
     parsing that str then converting it back to str
     """
     s = str(arrangement)
-    assert s == str(type(arrangement).parse(s)), error_msg
+    o, r = type(arrangement).parse(s)
+    assert r == "", "not everything parsed"
+    assert s == str(o), error_msg

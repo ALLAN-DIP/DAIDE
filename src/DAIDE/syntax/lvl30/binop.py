@@ -37,19 +37,10 @@ class BINOP(DAIDE_OBJECT, ABC):
 
         for subclass in BINOP.__subclasses__():
             if subclass.__name__ == OP:
-                return subclass(arrangements)
+                return subclass(arrangements), rest
 
 class AND(BINOP):
     pass
 
 class ORR(BINOP):
     pass
-
-
-if __name__ == "__main__":
-    import sys
-    current_module = sys.modules[__name__]
-
-    x = BINOP.__subclasses__()[0]
-    print("-")
-    print()

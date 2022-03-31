@@ -14,7 +14,7 @@ class UNIT(DAIDE_OBJECT):
         self.string = string
 
     def __str__(self):
-        return f"({self.string})"
+        return f"{self.string}"
 
     @classmethod
     def parse(cls, string, parens=False):

@@ -16,13 +16,14 @@ class ORDER(DAIDE_OBJECT):
         self.order_type = order_type
 
     def __str__(self):
-        return str(self.unit) + " " + str(self.order_type)
+        return f"({str(self.unit)}) {str(self.order_type)}"
 
     @classmethod
     def parse(cls, string):
         unit, rest = UNIT.parse(string, True)
-
+        
         rest = consume(rest, " ")
+        
         for subclass in ORDER.__subclasses__():
             if consume(rest, subclass.__name__, False) != False:
                 order_type, rest = subclass.parse(rest)
