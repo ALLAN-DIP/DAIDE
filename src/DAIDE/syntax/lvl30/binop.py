@@ -5,7 +5,6 @@ from abc import ABC
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.syntax.arrangement import ARRANGEMENT
-from DAIDE.utils.exceptions import ParseError
 from DAIDE.utils.parsing import consume 
 
 class BINOP(DAIDE_OBJECT, ABC):

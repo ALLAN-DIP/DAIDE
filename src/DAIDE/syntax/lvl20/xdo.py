@@ -3,6 +3,8 @@ __email__ = "sanderschulhoff@gmail.com"
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.utils.parsing import consume 
+from DAIDE.syntax.lvl0.order import ORDER 
+
 
 class XDO(DAIDE_OBJECT):
 

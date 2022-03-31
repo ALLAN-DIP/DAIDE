@@ -5,6 +5,7 @@ import re
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.utils.parsing import consume 
+from DAIDE.utils.exceptions import ParseError 
 
 class UNIT(DAIDE_OBJECT):
     regex = re.compile("^[A-Za-z]{3}\s[A-Za-z]{3}\s[A-Za-z]{3}")
