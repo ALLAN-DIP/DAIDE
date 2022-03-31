@@ -17,5 +17,12 @@ It can also generate a string from the object model.
 
 `pip install -e .`
 
+## Adding Syntax
+
+All syntax words are represented as objects which implement 
+
+a `parse()` function and `__str__`
+
+
 
 
