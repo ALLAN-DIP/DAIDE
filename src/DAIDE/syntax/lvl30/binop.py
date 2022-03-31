@@ -1,9 +1,10 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from abc import ABC, abstractmethod
+from abc import ABC
 
-from DAIDE.syntax.DAIDE_OBJECT import DAIDE_OBJECT
+from DAIDE.syntax.daide_object import DAIDE_OBJECT
+from DAIDE.syntax.arrangement import ARRANGEMENT
 from DAIDE.utils.exceptions import ParseError
 from DAIDE.utils.parsing import consume 
 

@@ -1,7 +1,7 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.syntax.DAIDE_OBJECT import DAIDE_OBJECT
+from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.utils.parsing import consume 
 
 class XDO(DAIDE_OBJECT):

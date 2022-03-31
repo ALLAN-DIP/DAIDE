@@ -4,7 +4,7 @@ __email__ = "sanderschulhoff@gmail.com"
 from functools import reduce
 import re
 
-from DAIDE.syntax.DAIDE_OBJECT import DAIDE_OBJECT
+from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.utils.parsing import consume 
 
 class ORDER(DAIDE_OBJECT):
