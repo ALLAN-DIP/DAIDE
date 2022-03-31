@@ -138,13 +138,11 @@ class VIA(ORDER):
         provinces = []
         province1, rest = PROVINCE.parse(rest)
         provinces.append(province1)
-        try:
-            while True:
-                rest = consume(rest, " ")
-                province, rest = PROVINCE.parse(rest)
-                provinces.append(province)
-        except Exception as e:
-            pass
+        while rest[0] == " ":
+            rest = consume(rest, " ")
+            province, rest = PROVINCE.parse(rest)
+            provinces.append(province)
+
         
         provinces, rest = PROVINCE.parse(rest)
         rest = consume(rest, ")")
