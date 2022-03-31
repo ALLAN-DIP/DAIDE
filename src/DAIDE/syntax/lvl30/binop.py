@@ -6,7 +6,6 @@ from abc import ABC
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.syntax.arrangement import ARRANGEMENT
 from DAIDE.utils.parsing import consume 
-from DAIDE.utils.exceptions import ConsumeError
 
 class BINOP(DAIDE_OBJECT, ABC):
     """Abstract Base Class for BINOP DAIDE words like AND, ORR"""
@@ -36,26 +35,16 @@ class BINOP(DAIDE_OBJECT, ABC):
             rest = consume(rest, ")")
             arrangements.append(arrangement)
 
-
         for subclass in BINOP.__subclasses__():
             if subclass.__name__ == OP:
                 return subclass(arrangements)
 
-
 class AND(BINOP):
-    def __init__(self, arrangements):
-        super().__init__(arrangements)
-    
-    def __str__(self):
-        return super().__str__()
-
+    pass
 
 class ORR(BINOP):
-    def __init__(self, arrangements):
-        super().__init__(arrangements)
+    pass
 
-    def __str__(self):
-        return super().__str__()
 
 if __name__ == "__main__":
     import sys
