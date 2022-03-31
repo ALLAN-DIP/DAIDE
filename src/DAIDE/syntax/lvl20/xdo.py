@@ -19,7 +19,7 @@ class XDO(DAIDE_OBJECT):
         """Parse XDO"""
 
         rest = consume(string, "XDO ")
-        print("rest", rest)
+        
         order, rest = ORDER.parse(rest)
-        print("rest", rest)
+        
         return XDO(order), rest
