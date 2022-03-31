@@ -19,7 +19,6 @@ class UNIT(DAIDE_OBJECT):
     @classmethod
     def parse(cls, string, parens=False):
         """Parse UNIT or (UNIT)"""
-        print(string, parens)
         if parens:
             string = consume(string, "(")
 

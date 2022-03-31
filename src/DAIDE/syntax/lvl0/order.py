@@ -20,21 +20,12 @@ class ORDER(DAIDE_OBJECT):
 
     @classmethod
     def parse(cls, string):
-        print("STR", string)
         unit, rest = UNIT.parse(string, True)
 
         rest = consume(rest, " ")
-
-        if consume(rest, "HLD", False) != False:
-            order_type, rest = HLD.parse(rest)
-        elif consume(rest, "MTO", False) != False:
-            order_type, rest = MTO.parse(rest)
-        elif consume(rest, "SUP", False) != False:
-            order_type, rest = SUP.parse(rest)
-        elif consume(rest, "CVY", False) != False:
-            order_type, rest = CVY.parse(rest)
-        elif consume(rest, "CTO", False) != False:
-            order_type, rest = CTO.parse(rest)
+        for subclass in ORDER.__subclasses__():
+            if consume(rest, subclass.__name__, False) != False:
+                order_type, rest = subclass.parse(rest)
         
         return ORDER(unit, order_type), rest
 

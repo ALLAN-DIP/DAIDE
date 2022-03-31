@@ -1,9 +1,8 @@
 from DAIDE import AND
-
-inputs = [[], ["FFF FFF FFF"], ["FFF FFF FFF", "GGG GGG GGG"]]
+from utils import EXAMPLE_ORDER, str_parse_str_test
+inputs = [[EXAMPLE_ORDER, EXAMPLE_ORDER]]
 
 for input in inputs:
     object = AND(input)
-    print(AND(str(AND(input))))
-    # assert str(AND(input)) == str(AND(str(AND(input)))), "PBT fail"
+    str_parse_str_test(object, "SPS test failure")
 
