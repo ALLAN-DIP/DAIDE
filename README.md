@@ -29,8 +29,8 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 'AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))'
 
 # easily compose DAIDE keywords
-from DAIDE import ORR,
->>> arrangement = AND(
+from DAIDE import ORR, ORDER, UNIT, HLD
+>>> arrangement = ORR([ORDER(UNIT("FFF FFF FFF"), HLD()), ORDER(UNIT("FFF FFF FFF"), HLD())])
 >>> 
 
 ```
