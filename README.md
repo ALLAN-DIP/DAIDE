@@ -6,6 +6,12 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 
 It can also generate a string from the object model.
 
+** Examples **
+
+FFF are placeholders
+
+`"AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))" -> AND([XDO(FFF FFF FFF), XDO(FFF FFF FFF))    `
+
 
 ## Installation
 
