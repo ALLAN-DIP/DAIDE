@@ -29,10 +29,10 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 'AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))'
 
 # easily compose DAIDE keywords
-from DAIDE import ORR, ORDER, UNIT, HLD
+>>> from DAIDE import ORR, ORDER, UNIT, HLD
 >>> arrangement = ORR([ORDER(UNIT("FFF FFF FFF"), HLD()), ORDER(UNIT("FFF FFF FFF"), HLD())])
->>> 
-
+>>> str(arrangement)
+<DAIDE.syntax.lvl30.binop.ORR object at 0x7f8fabb33dd8>
 ```
 
 It can also generate a string from the object model.
