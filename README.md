@@ -6,7 +6,7 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 
 It can also generate a string from the object model.
 
-** Examples **
+**Examples**
 
 FFF are placeholders
 
