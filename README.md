@@ -21,6 +21,11 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 <DAIDE.syntax.lvl30.binop.AND object at 0x7f8fabb332e8>
 >>> arrangement.arrangement.arrangements
 [<DAIDE.syntax.arrangement.ARRANGEMENT object at 0x7f8fab9bd588>, <DAIDE.syntax.arrangement.ARRANGEMENT object at 0x7f8fab9bd630>]
+
+# generate string from DAIDE object
+>>> str(arrangement)
+'AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))'
+
 ```
 
 It can also generate a string from the object model.
