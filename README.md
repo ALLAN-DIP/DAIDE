@@ -2,7 +2,7 @@
 
 SUPPORTS most bot communication commands levels 0-30
 
-This library parses DAIDE strings into a recursive object model
+This library parses DAIDE strings into a recursive object model. It can also generate a string from the object model.
 
 e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 
@@ -34,15 +34,6 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 >>> str(arrangement)
 <DAIDE.syntax.lvl30.binop.ORR object at 0x7f8fabb33dd8>
 ```
-
-It can also generate a string from the object model.
-
-**Examples**
-
-FFF are placeholders
-
-`"AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))" -> AND([XDO(FFF FFF FFF), XDO(FFF FFF FFF))    `
-
 
 ## Installation
 
