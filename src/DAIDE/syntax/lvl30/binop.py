@@ -4,7 +4,7 @@ __email__ = "sanderschulhoff@gmail.com"
 from abc import ABC
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
-from DAIDE.syntax.arrangement import ARRANGEMENT
+import DAIDE.syntax.arrangement as arrangement_module
 from DAIDE.utils.parsing import consume 
 
 class BINOP(DAIDE_OBJECT, ABC):
@@ -30,7 +30,7 @@ class BINOP(DAIDE_OBJECT, ABC):
         while rest[:2] == " (":
             rest = consume(rest, " (")
             
-            arrangement, rest = ARRANGEMENT.parse(rest)
+            arrangement, rest = arrangement_module.ARRANGEMENT.parse(rest)
             
             rest = consume(rest, ")")
             arrangements.append(arrangement)

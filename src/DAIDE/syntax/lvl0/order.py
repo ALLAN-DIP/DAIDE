@@ -11,6 +11,7 @@ from DAIDE.syntax.lvl0.unit import UNIT
 from DAIDE.syntax.lvl0.province import PROVINCE
 
 class ORDER(DAIDE_OBJECT):
+    """(unit) order_type"""
     def __init__(self, unit, order_type):
         self.unit = unit
         self.order_type = order_type
@@ -32,6 +33,11 @@ class ORDER(DAIDE_OBJECT):
 
 
 class HLD(ORDER):
+    """
+    (unit) HLD
+    
+    e.g. (ENG AMY LVP) HLD
+    """
     def __init__(self):
         pass
 

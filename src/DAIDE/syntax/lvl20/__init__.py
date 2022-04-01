@@ -1,1 +1,1 @@
-from DAIDE.syntax.lvl20.xdo import *
+from DAIDE.syntax.lvl20.xdo import XDO

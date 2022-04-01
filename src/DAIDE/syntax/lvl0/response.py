@@ -2,7 +2,7 @@ __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
-from DAIDE.syntax.arrangement import ARRANGEMENT
+import DAIDE.syntax.arrangement as arrangement_module
 from DAIDE.utils.parsing import consume 
 
 class RESPONSE(DAIDE_OBJECT):
@@ -19,7 +19,7 @@ class RESPONSE(DAIDE_OBJECT):
         response = string[:3]
         rest = string[3:]
         rest = consume(" (")
-        arrangement, rest = ARRANGEMENT.parse(rest)
+        arrangement, rest = arrangement_module.ARRANGEMENT.parse(rest)
         rest = consume(")")
 
         for subclass in RESPONSE.__subclasses__():
