@@ -8,7 +8,9 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 
 ## Usage
 
-```
+(FFF are placeholders)
+
+```python
 >>> from DAIDE import DAIDE_parse
 >>> arrangement = DAIDE_parse('AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))')
 
@@ -25,6 +27,11 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 # generate string from DAIDE object
 >>> str(arrangement)
 'AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))'
+
+# easily compose DAIDE keywords
+from DAIDE import ORR,
+>>> arrangement = AND(
+>>> 
 
 ```
 
