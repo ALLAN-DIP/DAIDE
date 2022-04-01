@@ -1,5 +1,7 @@
 # DAIDE
 
+SUPPORTS most bot communication commands levels 0-30
+
 This library parses DAIDE strings into a recursive object model
 
 e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
