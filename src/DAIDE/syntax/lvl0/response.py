@@ -3,7 +3,7 @@ __email__ = "sanderschulhoff@gmail.com"
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 import DAIDE.syntax.arrangement as arrangement_module
-from DAIDE.utils.parsing import consume 
+from DAIDE.utils.parsing import consume, parse_with_parens
 
 class RESPONSE(DAIDE_OBJECT):
     """YES, REJ, stuff like that"""
@@ -18,9 +18,8 @@ class RESPONSE(DAIDE_OBJECT):
     def parse(cls, string):
         response = string[:3]
         rest = string[3:]
-        rest = consume(" (")
-        arrangement, rest = arrangement_module.ARRANGEMENT.parse(rest)
-        rest = consume(")")
+        rest = consume(" ")
+        arrangement, rest = parse_with_parens(rest, arrangement_module.ARRANGEMENT)
 
         for subclass in RESPONSE.__subclasses__():
             if subclass.__name__ == response:

@@ -5,7 +5,7 @@ from abc import ABC
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 import DAIDE.syntax.arrangement as arrangement_module
-from DAIDE.utils.parsing import consume 
+from DAIDE.utils.parsing import consume, parse_with_parens
 
 class BINOP(DAIDE_OBJECT, ABC):
     """Abstract Base Class for BINOP DAIDE words like AND, ORR"""
@@ -28,11 +28,10 @@ class BINOP(DAIDE_OBJECT, ABC):
         
         arrangements = []
         while rest[:2] == " (":
-            rest = consume(rest, " (")
+            rest = consume(rest, " ")
             
-            arrangement, rest = arrangement_module.ARRANGEMENT.parse(rest)
+            arrangement, rest = parse_with_parens(rest, arrangement_module.ARRANGEMENT)
             
-            rest = consume(rest, ")")
             arrangements.append(arrangement)
 
         for subclass in BINOP.__subclasses__():

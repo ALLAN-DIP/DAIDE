@@ -13,3 +13,12 @@ def consume(string, sub, error=True):
             raise ConsumeError(string, f"Consume \"{sub}\"")
         else:
             return False
+
+def parse_with_parens(string, _class):
+    rest = consume(string, "(")
+        
+    parsed_class, rest = _class.parse(rest)
+
+    rest = consume(rest, ")")
+
+    return parsed_class, rest

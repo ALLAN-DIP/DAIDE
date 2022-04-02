@@ -3,7 +3,7 @@ __email__ = "sanderschulhoff@gmail.com"
 
 from DAIDE.syntax.daide_object import DAIDE_OBJECT
 from DAIDE.syntax.lvl0.order import ORDER 
-from DAIDE.utils.parsing import consume 
+from DAIDE.utils.parsing import consume, parse_with_parens
 
 class XDO(DAIDE_OBJECT):
 
@@ -17,10 +17,8 @@ class XDO(DAIDE_OBJECT):
     def parse(cls, string):
         """Parse XDO"""
 
-        rest = consume(string, "XDO (")
+        rest = consume(string, "XDO ")
         
-        order, rest = ORDER.parse(rest)
+        order, rest = parse_with_parens(rest, ORDER)
 
-        rest = consume(rest, ")")
-        
         return XDO(order), rest

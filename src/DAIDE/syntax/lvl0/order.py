@@ -26,9 +26,15 @@ class ORDER(DAIDE_OBJECT):
         rest = consume(rest, " ")
         
         for subclass in ORDER.__subclasses__():
+            # print(subclass.__name__, rest)
+            # print(consume(rest, subclass.__name__, False))
             if consume(rest, subclass.__name__, False) != False:
+                # print("HERE")
                 order_type, rest = subclass.parse(rest)
-        
+                break
+        else:
+            raise ParseError(string, "ORDER")
+
         return ORDER(unit, order_type), rest
 
 
@@ -58,7 +64,7 @@ class MTO(ORDER):
         self.province = province
 
     def __str__(self):
-        return "MTO " + self.province
+        return "MTO " + str(self.province)
 
     @classmethod
     def parse(cls, string):
@@ -73,21 +79,22 @@ class MTO(ORDER):
         return MTO(province), rest
 
 class SUP(ORDER):
-    def __init__(self, unit, mto_order):
+    def __init__(self, unit, mto_order=None):
         """SUP (unit) **OR** SUP (unit) MTO prov_no_coast"""
         self.unit = unit
         self.mto_order = mto_order
     
     def __str__(self):
-        return "SUP " + str(self.unit) + " " + str(self.mto_order) if self.mto_order else ""
+        return f"SUP ({str(self.unit)})" + (" " + str(self.mto_order) if self.mto_order else "")
 
     @classmethod
     def parse(cls, string):
         rest = consume(string, "SUP ")
         unit, rest = UNIT.parse(rest, parens=True)
-        rest = consume(rest, " ")
+        
         mto = None
-        if rest[:3] == "MTO":
+        if rest[:4] == " MTO":
+            rest = consume(rest, " ")
             mto, rest = MTO.parse(rest)
 
         return SUP(unit, mto), rest
@@ -99,35 +106,35 @@ class CVY(ORDER):
         self.cto_order = cto_order
     
     def __str__(self):
-        return "CVY " + str(self.unit) + str(self.cto_order) if self.cto_order else ""
+        return f"CVY ({str(self.unit)})" + (" " + str(self.cto_order) if self.cto_order else "")
 
     @classmethod
     def parse(cls, string):
         rest = consume(string, "CVY ")
         unit, rest = UNIT.parse(rest, parens=True)
-        rest = consume(rest, " ")
         cto = None
-        if rest[:3] == "CTO":
+        if rest[:4] == " CTO":
+            rest = consume(rest, " ")
             cto, rest = CTO.parse(rest)
 
         return CVY(unit, cto), rest
 
 class CTO(ORDER):
-    def __init__(self, province, via_order):
+    def __init__(self, province, via_order=None):
         """CTO province VIA (sea_province sea_province ...)"""
         self.province = province
         self.via_order = via_order
     
     def __str__(self):
-        return "CTO " + str(self.unit) + str(self.via_order) if self.via_order else ""
+        return f"CTO {str(self.province)}" + (" " + str(self.via_order) if self.via_order else "")
 
     @classmethod
     def parse(cls, string):
         rest = consume(string, "CTO ")
-        province, rest = PROVINCE.parse(rest, parens=True)
-        rest = consume(rest, " ")
+        province, rest = PROVINCE.parse(rest)
         via = None
-        if rest[:3] == "VIA":
+        if rest[:4] == " VIA":
+            rest = consume(rest, " ")
             via, rest = VIA.parse(rest)
 
         return CTO(province, via), rest
@@ -137,7 +144,7 @@ class VIA(ORDER):
         self.provinces = provinces
     
     def __str__(self):
-        return "VIA (" + reduce(lambda s, a: f"{s}, " + a, self.provinces) + ")"
+        return "VIA (" + reduce(lambda s, a: f"{s} " + str(a), self.provinces) + ")"
 
     @classmethod
     def parse(cls, string):
@@ -150,8 +157,6 @@ class VIA(ORDER):
             province, rest = PROVINCE.parse(rest)
             provinces.append(province)
 
-        
-        provinces, rest = PROVINCE.parse(rest)
         rest = consume(rest, ")")
 
         return VIA(provinces), rest
