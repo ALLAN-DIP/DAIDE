@@ -34,6 +34,15 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 'ORR ((FFF FFF FFF) HLD) ((FFF FFF FFF) HLD)'
 ```
 
+### Advanced
+
+If you are not working with DAIDE style orders (e.g. Diplomacy Github uses shorthand order style), run the following at the beginning of your code:
+
+```python
+from DAIDE import config
+config.ORDERS_DAIDE = False
+```
+
 ## Installation
 
 ### From Github (easiest)
