@@ -4,13 +4,13 @@ __email__ = "sanderschulhoff@gmail.com"
 from functools import reduce
 import re
 
-from DAIDE.syntax.daide_object import DAIDE_OBJECT
+from DAIDE.core import DaideObject
 from DAIDE.utils.parsing import consume 
 from DAIDE.utils.exceptions import ParseError 
-from DAIDE.syntax.lvl0.unit import UNIT
-from DAIDE.syntax.lvl0.province import PROVINCE
+from DAIDE.syntax.lvl0.unit import Unit
+from DAIDE.syntax.lvl0.province import Province
 
-class ORDER(DAIDE_OBJECT):
+class Order(DaideObject):
     """(unit) order_type"""
     def __init__(self, unit, order_type):
         self.unit = unit
@@ -21,11 +21,11 @@ class ORDER(DAIDE_OBJECT):
 
     @classmethod
     def parse(cls, string):
-        unit, rest = UNIT.parse(string, True)
+        unit, rest = Unit.parse(string, True)
         
         rest = consume(rest, " ")
         
-        for subclass in ORDER.__subclasses__():
+        for subclass in Order.__subclasses__():
             # print(subclass.__name__, rest)
             # print(consume(rest, subclass.__name__, False))
             if consume(rest, subclass.__name__, False) != False:
@@ -33,12 +33,12 @@ class ORDER(DAIDE_OBJECT):
                 order_type, rest = subclass.parse(rest)
                 break
         else:
-            raise ParseError(string, "ORDER")
+            raise ParseError(string, "Order")
 
-        return ORDER(unit, order_type), rest
+        return Order(unit, order_type), rest
 
 
-class HLD(ORDER):
+class HLD(Order):
     """
     (unit) HLD
     
@@ -55,7 +55,7 @@ class HLD(ORDER):
         rest = consume(string, "HLD")
         return HLD(), rest
                 
-class MTO(ORDER):
+class MTO(Order):
     
     regex = re.compile("^(ADR|AEG|ALB|ANK|APU|ARM|BAL|BAR|BEL|BER|BLA|BOH|BRE|BUD|BUL|BUR|CLY|CON|DEN|EAS|ECH|EDI|FIN|GAL|GAS|GOB|GOL|GRE|HEL|HOL|ION|IRI|KIE|LON|LVN|LVP|MAO|MAR|MOS|MUN|NAF|NAO|NAP|NTH|NWG|NWY|PAR|PIC|PIE|POR|PRU|ROM|RUH|RUM|SER|SEV|SIL|SKA|SMY|SPA|STP|SWE|SYR|TRI|TUN|TUS|TYR|TYS|UKR|VEN|VIE|WAL|WAR|WES|YOR)")
     
@@ -78,7 +78,7 @@ class MTO(ORDER):
 
         return MTO(province), rest
 
-class SUP(ORDER):
+class SUP(Order):
     def __init__(self, unit, mto_order=None):
         """SUP (unit) **OR** SUP (unit) MTO prov_no_coast"""
         self.unit = unit
@@ -90,7 +90,7 @@ class SUP(ORDER):
     @classmethod
     def parse(cls, string):
         rest = consume(string, "SUP ")
-        unit, rest = UNIT.parse(rest, parens=True)
+        unit, rest = Unit.parse(rest, parens=True)
         
         mto = None
         if rest[:4] == " MTO":
@@ -99,7 +99,7 @@ class SUP(ORDER):
 
         return SUP(unit, mto), rest
 
-class CVY(ORDER):
+class CVY(Order):
     def __init__(self, unit, cto_order):
         """CVY (unit) CTO province"""
         self.unit = unit
@@ -111,7 +111,7 @@ class CVY(ORDER):
     @classmethod
     def parse(cls, string):
         rest = consume(string, "CVY ")
-        unit, rest = UNIT.parse(rest, parens=True)
+        unit, rest = Unit.parse(rest, parens=True)
         cto = None
         if rest[:4] == " CTO":
             rest = consume(rest, " ")
@@ -119,7 +119,7 @@ class CVY(ORDER):
 
         return CVY(unit, cto), rest
 
-class CTO(ORDER):
+class CTO(Order):
     def __init__(self, province, via_order=None):
         """CTO province VIA (sea_province sea_province ...)"""
         self.province = province
@@ -131,7 +131,7 @@ class CTO(ORDER):
     @classmethod
     def parse(cls, string):
         rest = consume(string, "CTO ")
-        province, rest = PROVINCE.parse(rest)
+        province, rest = Province.parse(rest)
         via = None
         if rest[:4] == " VIA":
             rest = consume(rest, " ")
@@ -139,7 +139,7 @@ class CTO(ORDER):
 
         return CTO(province, via), rest
 
-class VIA(ORDER):
+class VIA(Order):
     def __init__(self, provinces):
         self.provinces = provinces
     
@@ -150,11 +150,11 @@ class VIA(ORDER):
     def parse(cls, string):
         rest = consume(string, "VIA (")
         provinces = []
-        province1, rest = PROVINCE.parse(rest)
+        province1, rest = Province.parse(rest)
         provinces.append(province1)
         while rest[0] == " ":
             rest = consume(rest, " ")
-            province, rest = PROVINCE.parse(rest)
+            province, rest = Province.parse(rest)
             provinces.append(province)
 
         rest = consume(rest, ")")

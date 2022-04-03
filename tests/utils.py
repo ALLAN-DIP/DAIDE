@@ -1,11 +1,11 @@
 """Property base testing"""
 
-from DAIDE import UNIT, ORDER, HLD
-from DAIDE import PROVINCE
+from DAIDE import Unit, Order, HLD
+from DAIDE import Province
 
-EXAMPLE_UNIT = UNIT("FFF FFF FFF")
-EXAMPLE_ORDER = ORDER(EXAMPLE_UNIT, HLD())
-EXAMPLE_PROVINCE = PROVINCE("ADR")
+EXAMPLE_UNIT = Unit("FFF FFF FFF")
+EXAMPLE_ORDER = Order(EXAMPLE_UNIT, HLD())
+EXAMPLE_PROVINCE = Province("ADR")
 
 def str_parse_str_test(arrangement):
     """

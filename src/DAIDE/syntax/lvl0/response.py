@@ -1,32 +1,31 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.syntax.daide_object import DAIDE_OBJECT
-import DAIDE.syntax.arrangement as arrangement_module
+from DAIDE.core import Arrangement
 from DAIDE.utils.parsing import consume, parse_with_parens
 
-class RESPONSE(DAIDE_OBJECT):
+class Response(Arrangement):
     """YES, REJ, stuff like that"""
-    def __init__(self, string, response):
-        self.string = string
-        self.response = response
+    def __init__(self, arrangement):
+        self.arrangement = arrangement
 
     def __str__(self):
-        return str(self.response) + " (" + self.msg + ")"
+        return f"{str(self.__class__.__name__)} ({self.arrangement})"
 
     @classmethod
     def parse(cls, string):
         response = string[:3]
         rest = string[3:]
-        rest = consume(" ")
-        arrangement, rest = parse_with_parens(rest, arrangement_module.ARRANGEMENT)
+        rest = consume(rest, " ")
+        arrangement, rest = parse_with_parens(rest, Arrangement)
 
-        for subclass in RESPONSE.__subclasses__():
+        for subclass in Response.__subclasses__():
             if subclass.__name__ == response:
                 return subclass(arrangement), rest
 
-class YES(RESPONSE):
+class YES(Response):
+    # def __init__(self, string):
+    #     super
     pass
-
-class HUH(RESPONSE):
+class HUH(Response):
     pass

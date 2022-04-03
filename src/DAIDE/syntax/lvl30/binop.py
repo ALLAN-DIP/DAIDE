@@ -3,11 +3,11 @@ __email__ = "sanderschulhoff@gmail.com"
 
 from abc import ABC
 
-from DAIDE.syntax.daide_object import DAIDE_OBJECT
-import DAIDE.syntax.arrangement as arrangement_module
+from DAIDE.core import DaideObject
+from DAIDE.core import Arrangement
 from DAIDE.utils.parsing import consume, parse_with_parens
 
-class BINOP(DAIDE_OBJECT, ABC):
+class Binop(DaideObject, ABC):
     """Abstract Base Class for BINOP DAIDE words like AND, ORR"""
     def __init__(self, arrangements):
         self.arrangements = arrangements
@@ -30,16 +30,16 @@ class BINOP(DAIDE_OBJECT, ABC):
         while rest[:2] == " (":
             rest = consume(rest, " ")
             
-            arrangement, rest = parse_with_parens(rest, arrangement_module.ARRANGEMENT)
+            arrangement, rest = parse_with_parens(rest, Arrangement)
             
             arrangements.append(arrangement)
 
-        for subclass in BINOP.__subclasses__():
+        for subclass in Binop.__subclasses__():
             if subclass.__name__ == OP:
                 return subclass(arrangements), rest
 
-class AND(BINOP):
+class AND(Binop):
     pass
 
-class ORR(BINOP):
+class ORR(Binop):
     pass

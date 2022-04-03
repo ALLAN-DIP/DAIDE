@@ -2,12 +2,11 @@ __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
 import re
-
-from DAIDE.syntax.daide_object import DAIDE_OBJECT
+from DAIDE.core import DaideObject
 from DAIDE.utils.parsing import consume 
 from DAIDE.utils.exceptions import ParseError 
 
-class UNIT(DAIDE_OBJECT):
+class Unit(DaideObject):
     regex = re.compile("^[A-Za-z]{3}\s[A-Za-z]{3}\s[A-Za-z]{3}")
     
     def __init__(self, string):
@@ -25,7 +24,7 @@ class UNIT(DAIDE_OBJECT):
         match = cls.regex.match(string)
         if match:
             matched_string = match.group()
-            unit = UNIT(matched_string)
+            unit = Unit(matched_string)
             rest = string[len(matched_string):]
 
             if parens:

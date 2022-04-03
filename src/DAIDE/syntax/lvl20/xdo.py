@@ -1,11 +1,11 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.syntax.daide_object import DAIDE_OBJECT
-from DAIDE.syntax.lvl0.order import ORDER 
+from DAIDE.core import Arrangement
+from DAIDE.syntax.lvl0.order import Order 
 from DAIDE.utils.parsing import consume, parse_with_parens
 
-class XDO(DAIDE_OBJECT):
+class XDO(Arrangement):
 
     def __init__(self, order):
         self.order = order
@@ -19,6 +19,6 @@ class XDO(DAIDE_OBJECT):
 
         rest = consume(string, "XDO ")
         
-        order, rest = parse_with_parens(rest, ORDER)
+        order, rest = parse_with_parens(rest, Order)
 
         return XDO(order), rest
