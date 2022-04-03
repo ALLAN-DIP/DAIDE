@@ -13,28 +13,25 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 (FFF are placeholders)
 
 ```python
->>> from DAIDE import DAIDE_parse
->>> arrangement = DAIDE_parse('AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))')
+>>> from DAIDE import parse
+>>> arrangement = parse('AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))')
 
-# ARRANGEMENT is wrapper object around all parsed DAIDE objects
 >>> arrangement
-<DAIDE.syntax.arrangement.ARRANGEMENT object at 0x7fbd43285470>
+<DAIDE.syntax.lvl30.binop.AND object at 0x7fb6623193c8>
 
 # parsed objects are nested
->>> arrangement.arrangement
-<DAIDE.syntax.lvl30.binop.AND object at 0x7f8fabb332e8>
->>> arrangement.arrangement.arrangements
-[<DAIDE.syntax.arrangement.ARRANGEMENT object at 0x7f8fab9bd588>, <DAIDE.syntax.arrangement.ARRANGEMENT object at 0x7f8fab9bd630>]
+>>> arrangement.arrangements
+[<DAIDE.syntax.lvl20.xdo.XDO object at 0x7fb6622bd7f0>, <DAIDE.syntax.lvl20.xdo.XDO object at 0x7fb6622bd8d0>]
 
 # generate string from DAIDE object
 >>> str(arrangement)
 'AND (XDO ((FFF FFF FFF) HLD)) (XDO ((FFF FFF FFF) HLD))'
 
 # easily compose DAIDE keywords
->>> from DAIDE import ORR, ORDER, UNIT, HLD
->>> arrangement = ORR([ORDER(UNIT("FFF FFF FFF"), HLD()), ORDER(UNIT("FFF FFF FFF"), HLD())])
+>>> from DAIDE import Order, Unit, ORR, HLD
+>>> arrangement = ORR([Order(Unit("FFF FFF FFF"), HLD()), Order(Unit("FFF FFF FFF"), HLD())])
 >>> str(arrangement)
-<DAIDE.syntax.lvl30.binop.ORR object at 0x7f8fabb33dd8>
+'ORR ((FFF FFF FFF) HLD) ((FFF FFF FFF) HLD)'
 ```
 
 ## Installation
