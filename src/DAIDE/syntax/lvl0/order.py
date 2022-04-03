@@ -4,6 +4,7 @@ __email__ = "sanderschulhoff@gmail.com"
 from functools import reduce
 import re
 
+import DAIDE.config as config
 from DAIDE.core import DaideObject
 from DAIDE.utils.parsing import consume 
 from DAIDE.utils.exceptions import ParseError 
@@ -12,15 +13,27 @@ from DAIDE.syntax.lvl0.province import Province
 
 class Order(DaideObject):
     """(unit) order_type"""
-    def __init__(self, unit, order_type):
+    def __init__(self, unit, order_type, non_DAIDE_order=None):
         self.unit = unit
         self.order_type = order_type
+        self.non_DAIDE_order = non_DAIDE_order
 
     def __str__(self):
+        if self.non_DAIDE_order:
+            return str(self.non_DAIDE_order)
         return f"({str(self.unit)}) {str(self.order_type)}"
 
     @classmethod
     def parse(cls, string):
+        if not config.ORDERS_DAIDE:
+            regex = re.compile("^([^\(\)]*)")
+            match = regex.match(string)
+            if match:
+                order = match.group()
+                rest = string[len(order):]
+
+            return Order(None, None, non_DAIDE_order=order), rest
+                
         unit, rest = Unit.parse(string, True)
         
         rest = consume(rest, " ")
