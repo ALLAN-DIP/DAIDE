@@ -28,7 +28,8 @@ class ALY(DaideObject):
         groups = re.findall(r'\(([a-zA-Z\s]*)\)', string)
 
         if len(groups) != 2:
-            raise ParseError("Found more than 2 groups")
+            more = len(groups) > 2
+            raise ParseError("Found " + "more" if more else "less"  + " 2 groups", "ALY")
 
         rest = consume(string, "ALY (")
 
