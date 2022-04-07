@@ -7,4 +7,4 @@ class ParseError(Exception):
 
 class ConsumeError(ParseError):
     def __init__(self, string, to_consume):
-        super().__init__(f"Can't consume {to_consume} from {string}.")
+        super().__init__(to_consume, string)
