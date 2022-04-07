@@ -1,7 +1,7 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.utils.exceptions import ParseError, ConsumeError
+from DAIDE.utils.exceptions import ConsumeError
 
 def consume(string, sub, error=True):
     """"""

@@ -2,11 +2,8 @@ __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
 from abc import ABC, abstractmethod
-from DAIDE.utils.parsing import ParseError
+import DAIDE.utils.parsing as parsing
 from DAIDE.utils.parsing import consume
-
-
-
 
 class DaideObject(ABC):
     """Abstract Base Class for DAIDE objects"""
@@ -47,5 +44,5 @@ def parse(string):
     object, rest = DaideObject.parse(string)
 
     if rest != "":
-        raise ParseError("Couldnt completely parse string")
+        raise parsing.ParseError("Couldnt completely parse string")
     return object
