@@ -3,7 +3,7 @@ __email__ = "sanderschulhoff@gmail.com"
 
 from abc import ABC, abstractmethod
 import DAIDE.utils.parsing as parsing
-from DAIDE.utils.parsing import consume
+from DAIDE.utils.parsing import consume, parse_with_parens
 
 class DaideObject(ABC):
     """Abstract Base Class for DAIDE objects"""
@@ -39,6 +39,23 @@ class Arrangement(DaideObject, ABC):
             arrangement, rest = Order.parse(string)
 
         return arrangement, rest
+
+class SimpleParensObject(DaideObject):
+    """
+    Parsing class for classes that use simple parentheses + arrangement syntax
+    e.g. YES (arrangement), PRP (arrangement)
+    """
+    def __init__(self, arrangement):
+        self.arrangement = arrangement
+
+    def __str__(self):
+        return f"{str(self.__class__.__name__)} ({self.arrangement})"
+
+    @classmethod
+    def parse(cls, string):
+        rest = consume(string, cls.__name__ + " ")
+        arrangement, rest = parse_with_parens(rest, Arrangement)
+        return cls(arrangement), rest
         
 def parse(string):
     object, rest = DaideObject.parse(string)
