@@ -16,4 +16,4 @@ def str_parse_str_test(arrangement):
     s = str(arrangement)
     o, r = type(arrangement).parse(s)
     assert r == "", "not everything parsed: " + r 
-    assert s == str(o), f"{arrangement.__class__.__name__} SPS test failed"
+    assert s == str(o), f"{arrangement.__class__.__name__} SPS test failed: \n" + s + "\n" + str(o)

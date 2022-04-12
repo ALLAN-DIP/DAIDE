@@ -2,6 +2,7 @@
 from DAIDE import Order, Province, Arrangement, Unit
 from DAIDE import YES
 from DAIDE import MTO, SUP, CVY, CTO, VIA
+from DAIDE import PRP
 from DAIDE import ALY
 from DAIDE import XDO
 from DAIDE import AND, ORR
@@ -38,6 +39,10 @@ str_parse_str_test(object)
 object = Order(EXAMPLE_UNIT, CTO(EXAMPLE_PROVINCE, VIA([EXAMPLE_PROVINCE, EXAMPLE_PROVINCE])))
 str_parse_str_test(object)
 
+"""lvl10"""
+object = PRP(AND([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
+str_parse_str_test(object)
+
 """lvl20"""
 object = XDO(EXAMPLE_ORDER)
 str_parse_str_test(object)
@@ -54,3 +59,4 @@ str_parse_str_test(object)
 
 object = YES(AND([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
 str_parse_str_test(object)
+

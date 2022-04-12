@@ -1,10 +1,10 @@
 __author__ = "Sander Schulhoff"
 __email__ = "sanderschulhoff@gmail.com"
 
-from DAIDE.core import Arrangement
+from DAIDE.core import Arrangement, DaideObject
 from DAIDE.utils.parsing import consume, parse_with_parens
 
-class Response(Arrangement):
+class Response(DaideObject):
     """YES, REJ, stuff like that"""
     def __init__(self, arrangement):
         self.arrangement = arrangement
