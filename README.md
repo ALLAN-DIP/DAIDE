@@ -2,7 +2,7 @@
 
 SUPPORTS most bot order related communication commands levels 0-30
 
-AND ORR XDO HLD MTO SUP CVY CTO VIA YES HUH
+AND ORR XDO HLD MTO SUP CVY CTO VIA YES HUH FCT PRP
 
 This library parses DAIDE strings into a recursive object model. It can also generate a string from the object model.
 
