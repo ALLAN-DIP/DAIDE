@@ -26,11 +26,12 @@ class Arrangement(DaideObject, ABC):
     @classmethod
     @abstractmethod
     def parse(cls, string):
-        from DAIDE.syntax.lvl20.xdo import XDO
-        from DAIDE.syntax.lvl30.binop import Binop
         from DAIDE.syntax.lvl0.order import Order 
         from DAIDE.syntax.lvl0.response import Response
-        from DAIDE.syntax.lvl0.statement import FCT
+        from DAIDE.syntax.lvl10.statement import FCT
+        from DAIDE.syntax.lvl20.xdo import XDO
+        from DAIDE.syntax.lvl30.binop import Binop
+        
         
         subclasses = Response.__subclasses__() + Binop.__subclasses__() + [XDO,FCT]
         for subclass in subclasses:
