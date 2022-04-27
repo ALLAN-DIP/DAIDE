@@ -30,7 +30,9 @@ class Arrangement(DaideObject, ABC):
         from DAIDE.syntax.lvl30.binop import Binop
         from DAIDE.syntax.lvl0.order import Order 
         from DAIDE.syntax.lvl0.response import Response
-        subclasses = Response.__subclasses__() + Binop.__subclasses__() + [XDO]
+        from DAIDE.syntax.lvl0.statement import FCT
+        
+        subclasses = Response.__subclasses__() + Binop.__subclasses__() + [XDO,FCT]
         for subclass in subclasses:
             if consume(string, subclass.__name__, False) != False:
                 arrangement, rest = subclass.parse(string)
