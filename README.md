@@ -1,6 +1,6 @@
 # DAIDE
 
-SUPPORTS most bot order related communication commands levels 0-30
+SUPPORTS most bot order related communication commands levels 0-30. Please make an issue if u want a new word (or a PR :) )
 
 AND ORR XDO HLD MTO SUP CVY CTO VIA YES HUH FCT PRP
 
