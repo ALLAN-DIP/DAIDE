@@ -10,7 +10,7 @@ e.g. `"AND (order1) (order2)" -> AND([order1, order2])`
 
 ## Usage
 
-(FFF are placeholders)
+(FFF are placeholders for a province)
 
 ```python
 >>> from DAIDE import parse
