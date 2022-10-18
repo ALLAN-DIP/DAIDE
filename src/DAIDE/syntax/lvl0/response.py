@@ -23,3 +23,6 @@ class YES(Response):
 
 class HUH(Response):
     pass
+
+class REJ(Resonpse):
+    pass
