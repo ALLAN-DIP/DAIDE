@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="DAIDE",
-    version="0.0.1",
+    version="0.0.2",
     author="Sander Schulhoff",
     author_email="sanderschulhoff@gmail.com",
     description="DAIDE parsing stuff",
