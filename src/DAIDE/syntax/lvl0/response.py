@@ -24,5 +24,5 @@ class YES(Response):
 class HUH(Response):
     pass
 
-class REJ(Resonpse):
+class REJ(Response):
     pass
