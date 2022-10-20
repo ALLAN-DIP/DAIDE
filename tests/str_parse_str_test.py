@@ -1,6 +1,6 @@
 
 from DAIDE import Order, Province, Arrangement, Unit
-from DAIDE import YES
+from DAIDE import YES, REJ
 from DAIDE import MTO, SUP, CVY, CTO, VIA
 from DAIDE import PRP, FCT
 from DAIDE import ALY
@@ -63,3 +63,5 @@ str_parse_str_test(object)
 object = YES(AND([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
 str_parse_str_test(object)
 
+object = REJ(And([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
+str_parse_str_test(object)
