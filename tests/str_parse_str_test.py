@@ -63,5 +63,5 @@ str_parse_str_test(object)
 object = YES(AND([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
 str_parse_str_test(object)
 
-object = REJ(And([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
+object = REJ(AND([XDO(EXAMPLE_ORDER), XDO(EXAMPLE_ORDER)]))
 str_parse_str_test(object)
